@@ -32,3 +32,5 @@ function App() {
 export default App;
 //Navigate is used for Router redirection
 //* means all routes other than defined above
+//Query parameter is separated with a ? in the url
+//myapp.com/users/100 OR myapp.com/users?lastname=doe&firstname=john
