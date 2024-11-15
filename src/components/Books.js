@@ -5,16 +5,28 @@ import { BooksContext } from "../BooksContext";
 export default function Books() {
   const books = useContext(BooksContext);
 
+  // const query = new URLSearchParams(useLocation().search);
+  // const search = query.get("search") || "";
+
   const query = new URLSearchParams(useLocation().search);
   const search = query.get("search") || "";
+  const author = query.get("author") || "";
 
-  //   useEffect(() => {
-  //     console.log(query);
-  //     console.log(search);
-  //   });
+  useEffect(() => {
+    //http://localhost:3000/?search=kill
+    // console.log("query is: " + query); // search=kill
+    // console.log("search is: " + search); //kill
 
-  const filteredBooks = books.filter((b) =>
-    b.title.toLowerCase().includes(search.toLocaleLowerCase())
+    //http://localhost:3000/?search=kill&author=Lee
+    console.log("query is: " + query); // search=kill&author=Lee
+    console.log("search is: " + search); //kill
+    console.log("author is: " + author); //Lee
+  });
+
+  const filteredBooks = books.filter(
+    (b) =>
+      b.title.toLowerCase().includes(search.toLocaleLowerCase()) &&
+      b.author.toLowerCase().includes(author.toLocaleLowerCase())
   );
 
   return (
@@ -23,7 +35,8 @@ export default function Books() {
       <ul>
         {filteredBooks.map((book) => (
           <li key={book.id}>
-            {book.title} by {book.author}
+            Title : {book.title} <br></br>
+            Author : {book.author}
           </li>
         ))}
       </ul>
